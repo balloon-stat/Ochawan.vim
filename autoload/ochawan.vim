@@ -27,7 +27,10 @@ endfunction
 
 function! ochawan#live()
   if s:init()
+    let save_op = g:openbrowser_open_filepath_in_vim 
+    g:openbrowser_open_filepath_in_vim = 0
     python ochawan.live()
+    let g:openbrowser_open_filepath_in_vim = save_op
   endif
 endfunction
 
