@@ -45,12 +45,13 @@ https://github.com/tyru/open-browser.vim
 `t` クリップボードのデータが生放送中のURLの場合、コメントサーバに接続します。  
 `@` 184の設定をトグルします。  
 `<CR>` プロンプトの行で入力したときにプロンプトの後ろの文字列をコメントします。  
-挿入モードで<CR>を押した場合も上記と同じ動作をします。  
+挿入モードで`<CR>`を押した場合も上記と同じ動作をします。  
 
-`b` <Plug>(openbrowser-smart-search)を割り当てています。  
+`b` openbrowser.vimの`<Plug>(openbrowser-smart-search)`を割り当てています。  
 
 #### グローバル変数
 
-`g:ochawan_prompt` バッファのプロンプト `'> '`
-`ochawan_buf_height` バッファの高さ `'4'`
-`ochawan_is_anonymous` 184の設定 `1`
+`g:ochawan_prompt` バッファのプロンプト `'> '`  
+`ochawan_buf_height` バッファの高さ `'4'`  
+`ochawan_is_anonymous` 184の設定 `1`  
+
