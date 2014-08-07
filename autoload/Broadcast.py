@@ -41,21 +41,23 @@ class Broadcast:
         return self.conn != None and self.comc != None and self.comc.is_connect
 
     def connect(self, lvid):
-        if self.is_connect():
-            self.stop()
-        self.conn.lvid = lvid
-        info = self.conn.getPlayerStatus()
-        if info is None:
-            print "Fail GetPlayerStatus()"
-            return
-        self.comc.connect(info)
-        self.conn.getToken()
-        th_keep = threading.Thread(target=self.comc.keepSession)
-        th_keep.daemon = True
-        th_keep.start()
-        th_recv = threading.Thread(target=self.comc.recv)
-        th_recv.daemon = True
-        th_recv.start()
+        try:
+            self.conn.lvid = lvid
+            info = self.conn.getPlayerStatus()
+            if info is None:
+                print "Fail GetPlayerStatus()"
+                return
+            self.comc.connect(info)
+            self.conn.getToken()
+            th_keep = threading.Thread(target=self.comc.keepSession)
+            th_keep.daemon = True
+            th_keep.start()
+            th_recv = threading.Thread(target=self.comc.recv)
+            th_recv.daemon = True
+            th_recv.start()
+        except Exception as e:
+            print e.message
+            print info
 
     def start(self, title, content, community, category, livetags):
         if not self.conn.isLogin():
@@ -74,7 +76,6 @@ class Broadcast:
 
     def stop(self):
         self.comc.close()
-        self.comc = CN.CommClient()
 
     def live(self):
         title = ""
@@ -133,3 +134,5 @@ class Broadcast:
             th = CN.SendMsgThread(body, anonym, self.comc, self.conn)
             th.start()
 
+    def doBouyomi(self):
+        self.comc.do_bouyomi = True

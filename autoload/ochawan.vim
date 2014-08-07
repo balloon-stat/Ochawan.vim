@@ -21,6 +21,9 @@ function! s:init()
   endif
   python from Broadcast import Broadcast
   execute "python ochawan = Broadcast('".$HOME."')"
+  if g:ochawan_is_bouyomi
+    python ochawan.doBouyomi()
+  endif
   let s:ochawan_is_initialized = 1
   return 1
 endfunction
@@ -28,7 +31,7 @@ endfunction
 function! ochawan#live()
   if s:init()
     let save_op = g:openbrowser_open_filepath_in_vim 
-    g:openbrowser_open_filepath_in_vim = 0
+    let g:openbrowser_open_filepath_in_vim = 0
     python ochawan.live()
     let g:openbrowser_open_filepath_in_vim = save_op
   endif
@@ -42,7 +45,8 @@ function! ochawan#connect()
       return
     endif
     let url = substitute(url, prefix, '', '')
-    let lvid = strpart(url, 0, stridx(url, '?'))
+    let idx = stridx(url, '?')
+    let lvid = strpart(url, 0, idx == -1 ? strlen(url) : idx)
     execute "python ochawan.connect('".lvid."')"
     echo "connect: ".lvid
   endif

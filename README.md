@@ -24,7 +24,7 @@ https://github.com/tyru/open-browser.vim
 コメントの送受信を行う専用のバッファを開きます。  
 
 ```
-:OchawanConnectLive
+:OchawanConnectOnClip
 ```
 
 クリップボードのデータが生放送中のURLかどうかを試し、  

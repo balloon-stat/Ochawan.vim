@@ -11,6 +11,7 @@ import time
 import datetime
 import cookielib
 from xml.etree import ElementTree
+from Bouyomi import Bouyomi
 
 class ConnectNicolive:
     def __init__(self, cookiePath, lvid=None):
@@ -103,6 +104,11 @@ class SendMsgThread(threading.Thread):
 
 class CommClient:
     def __init__(self):
+        self.sock = None
+        self.is_connect = False
+        self.do_bouyomi = False
+
+    def initialize(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.is_connect = False
         self.prev = ""
@@ -112,6 +118,9 @@ class CommClient:
         self.queue = []
 
     def connect(self, info):
+        if not self.sock is None:
+            self.close()
+        self.initialize()
         (addr, port, thread, base_time, user_id, is_premium) = info
         host = socket.gethostbyname(addr)
         self.sock.connect( (host, int(port)) )
@@ -214,6 +223,11 @@ class CommClient:
         #print text
         self.count = int(no)
         self.queue.append((no, uid, text))
+        if self.do_bouyomi:
+            bouyomi = Bouyomi()
+            bouyomi.connect()
+            bouyomi.send(text.encode("utf-8"))
+            bouyomi.close()
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
