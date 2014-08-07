@@ -1,11 +1,11 @@
 Ochawan.vim
 ===========
 
-ニコニコ生放送の枠とりとコメントの送信、受信ができます。  
+ニコニコ生放送の枠とりと、コメントの送受信ができます。  
 if_pythonを必要とします。  
 まだalphaバージョンです。  
 
-ブラウザを開くのにopenbrowser.vimが使っています。  
+ブラウザを開くのにopenbrowser.vimを使っています。  
 https://github.com/tyru/open-browser.vim  
 
 #### コマンド
@@ -14,7 +14,7 @@ https://github.com/tyru/open-browser.vim
 :OchawanStartLive
 ```
 
-現在のバッファに書かれた放送情報に従って、生放送を開始します。  
+現在のバッファの放送情報に従って、生放送を開始します。  
 放送情報の記述方法は`nicolive_sample.desc`を参考にしてください。  
 
 ```
@@ -39,7 +39,7 @@ https://github.com/tyru/open-browser.vim
 
 ### 専用バッファのキーマップ
 
-`o` 日本語入力をONにして、入力待ちになります。  
+`o` プロンプトへ移動し、日本語入力をONで挿入モードになります。  
 `q` バッファを削除します。  
 `r` 前のウィンドウに戻ります。  
 `t` クリップボードのデータが生放送中のURLの場合、コメントサーバに接続します。  
@@ -52,6 +52,7 @@ https://github.com/tyru/open-browser.vim
 #### グローバル変数
 
 `g:ochawan_prompt` バッファのプロンプト `'> '`  
-`ochawan_buf_height` バッファの高さ `'4'`  
-`ochawan_is_anonymous` 184の設定 `1`  
+`g:ochawan_buf_height` バッファの高さ `'4'`  
+`g:ochawan_is_anonymous` 184の設定 `1`  
+`g:ochawan_do_bouyomi` コメントを棒読みちゃんに読ませる `0`  
 
