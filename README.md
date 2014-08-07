@@ -8,7 +8,9 @@ if_pythonを必要とします。
 ブラウザを開くのにopenbrowser.vimを使っています。  
 https://github.com/tyru/open-browser.vim  
 
-#### コマンド
+
+### コマンド
+
 
 ```
 :OchawanStartLive
@@ -37,7 +39,10 @@ https://github.com/tyru/open-browser.vim
 `{string}`とコメントします。  
 コメントサーバに接続してある必要があります。  
 
+-------------------------------------------
+
 ### 専用バッファのキーマップ
+
 
 `o` プロンプトへ移動し、日本語入力をONで挿入モードになります。  
 `q` バッファを削除します。  
@@ -49,7 +54,10 @@ https://github.com/tyru/open-browser.vim
 
 `b` openbrowser.vimの`<Plug>(openbrowser-smart-search)`を割り当てています。  
 
-#### グローバル変数
+-------------------------------------------
+
+### グローバル変数
+
 
 `g:ochawan_prompt` バッファのプロンプト `'> '`  
 `g:ochawan_buf_height` バッファの高さ `'4'`  
