@@ -68,11 +68,11 @@ class Broadcast:
         tempfile = "ochawan_temp.html"
         lvid = tw.take(self.conn.cookiejar, tempfile)
         if lvid == "":
-            vim.command("OpenBrowser " + tempfile)
+            vim.command(vim.eval("g:ochawan_openbrowser_command") + " " + tempfile)
             return
         self.connect(lvid)
         url = "http://live.nicovideo.jp/watch/" + lvid
-        vim.command("OpenBrowser " + url)
+        vim.command(vim.eval("g:ochawan_openbrowser_command") + " "  + url)
 
     def stop(self):
         self.comc.close()

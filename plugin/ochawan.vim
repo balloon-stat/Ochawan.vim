@@ -15,6 +15,7 @@ let g:ochawan_prompt = get(g:, 'ochawan_prompt', '> ')
 let g:ochawan_buf_height = get(g:, 'ochawan_buf_height', '4')
 let g:ochawan_is_anonymaous = get(g:, 'ochawan_is_anonymous', 1)
 let g:ochawan_is_bouyomi = get(g:, 'ochawan_is_bouyomi', 0)
+let g:ochawan_openbrowser_command = get(g:, 'ochawan_openbrowser_command', 'OpenBrowser')
 let g:loaded_ochawan = 1
 
 let &cpo = s:save_cpo

@@ -30,10 +30,14 @@ endfunction
 
 function! ochawan#live()
   if s:init()
-    let save_op = g:openbrowser_open_filepath_in_vim 
-    let g:openbrowser_open_filepath_in_vim = 0
-    python ochawan.live()
-    let g:openbrowser_open_filepath_in_vim = save_op
+    if exists("g:openbrowser_open_filepath_in_vim")
+      let save_op = g:openbrowser_open_filepath_in_vim
+      let g:openbrowser_open_filepath_in_vim = 0
+      python ochawan.live()
+      let g:openbrowser_open_filepath_in_vim = save_op
+    else
+      python ochawan.live()
+    endif
   endif
 endfunction
 
@@ -102,6 +106,7 @@ endfunction
 
 function! s:settings_chat_buf()
   nmap <buffer> b <Plug>(openbrowser-smart-search)
+  nmap <buffer> u <Plug>(openbrowser-open)
   nnoremap <silent> <buffer> o :<C-u>call <SID>writing()<CR>
   nnoremap <silent> <buffer> q :<C-u>bwipeout<CR>
   nnoremap <silent> <buffer> r :<C-u>wincmd p<CR>

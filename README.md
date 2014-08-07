@@ -39,7 +39,7 @@ https://github.com/tyru/open-browser.vim
 `{string}`とコメントします。  
 コメントサーバに接続してある必要があります。  
 
--------------------------------------------
+
 
 ### 専用バッファのキーマップ
 
@@ -53,8 +53,9 @@ https://github.com/tyru/open-browser.vim
 挿入モードで`<CR>`を押した場合も上記と同じ動作をします。  
 
 `b` openbrowser.vimの`<Plug>(openbrowser-smart-search)`を割り当てています。  
+`u` openbrowser.vimの`<Plug>(openbrowser-open)`を割り当てています。  
 
--------------------------------------------
+
 
 ### グローバル変数
 
@@ -63,4 +64,5 @@ https://github.com/tyru/open-browser.vim
 `g:ochawan_buf_height` バッファの高さ `'4'`  
 `g:ochawan_is_anonymous` 184の設定 `1`  
 `g:ochawan_do_bouyomi` コメントを棒読みちゃんに読ませる `0`  
+`g:ochawan_openbrowser_command"` ブラウザを開くコマンド `OpenBrowser`  
 
