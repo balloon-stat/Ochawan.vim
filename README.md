@@ -39,7 +39,12 @@ https://github.com/tyru/open-browser.vim
 `{string}`とコメントします。  
 コメントサーバに接続してある必要があります。  
 
+```
+:OchawanOnBouyomi {number}
+```
 
+`{number}`が `0` 以外の場合、コメントを棒読みちゃんに送り  
+読み上げてもらいます。 `0` を指定すると読み上げをやめます。
 
 ### 専用バッファのキーマップ
 
@@ -64,5 +69,5 @@ https://github.com/tyru/open-browser.vim
 `g:ochawan_buf_height` バッファの高さ `'4'`  
 `g:ochawan_is_anonymous` 184の設定 `1`  
 `g:ochawan_do_bouyomi` コメントを棒読みちゃんに読ませる `0`  
-`g:ochawan_openbrowser_command"` ブラウザを開くコマンド `OpenBrowser`  
+`g:ochawan_openbrowser_command` ブラウザを開くコマンド `'OpenBrowser'`  
 

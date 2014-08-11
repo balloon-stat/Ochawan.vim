@@ -1,0 +1,144 @@
+*ochawan.jax*		ニコニコ生放送の枠とりとコメントの送受信をします。
+
+Version: 1.0
+Author : yuk
+License: MIT LICENSE
+
+==============================================================================
+目次								*ochawan-contents*
+
+概要						|ochawan-introduction|
+インターフェース			|ochawan-interface|
+	コマンド				|ochawan-commands|
+	関数					|ochawan-functions|
+	キーマッピング			|ochawan-key-mappings|
+カスタマイズ				|ochawan-customizing|
+放送情報の記述のサンプル	|ochawan-description-sample|
+
+==============================================================================
+概要								*ochawan-introduction*
+
+*Ochawan.vim* は、Vimからニコニコ生放送の枠とりとコメントの送受信を
+可能にするプラグインです。
+|:OchawanStartLive| コマンドで枠をとり、
+|:OchawanOpenBuf| コマンドでコメント送受信用の専用バッファを開きます。
+
+要件:
+- if_python が有効であること
+- python2.7 が実行可能であること
+- openbrowser.vim
+
+最新版:
+https://github.com/balloon-stat/Ochawan.vim
+
+
+==============================================================================
+インターフェース					*ochawan-interface*
+
+------------------------------------------------------------------------------
+コマンド							*ochawan-commands*
+
+:OchawanStartLive		*:OchawanStartLive*
+	現在のバッファの放送情報に従って、生放送を開始します。
+	放送情報の記述方法は|ochawan-description-sample|を参考にしてください。
+
+:OchawanOpenBuf			*:OchawanOpenBuf*
+	コメントの送受信を行う専用のバッファを開きます
+
+:OchawanConnectOnClip	*:OchawanConnectOnClip*
+	クリップボードのデータが生放送中のURLかどうかを試し、
+	放送中のURLの場合、コメントサーバに接続します。
+
+:OchawanSendMsg {string}
+	{string}とコメントします。
+	コメントサーバに接続してある必要があります。
+
+:OchawanOnBouyomi {Number}
+	{Number}を 1 にすると棒読みちゃんを有効にします。
+	 0 にすると無効にします。
+
+------------------------------------------------------------------------------
+キーマッピング						*ochawan-key-mappings*
+
+|OchawanOpenBuf| で開くバッファでは以下のキーマッピングがされています。
+
+ノーマルモード
+{lhs}		{rhs}
+-----		-----------------------------
+o			プロンプトへ移動し、日本語入力をONで挿入モードになります。
+q			:<C-u>bwipeout<CR>
+r			:<C-u>wincmd p<CR>
+t			|:OchawanConnectOnClip| を実行します
+@			184 の設定をトグルします。
+<CR>		プロンプトの行で入力したときにその文字列をコメントします。
+b			<Plug>(openbrowser-smart-search)
+u			<Plug>(openbrowser-open)
+
+インサートモード
+{lhs}		{rhs}
+--------	-----------------------------
+<C-@>		184 の設定をトグルします。
+<CR>		プロンプトの行で入力したときにその文字列をコメントします。
+
+
+==============================================================================
+カスタマイズ						*ochawan-customizing*
+
+g:ochawan_prompt				*g:ochawan_prompt*
+	バッファのプロンプトに表示される文字列です。
+	デフォルトは '> ' です。
+
+g:ochawan_buf_height			*g:ochawan_buf_height*
+	バッファのウィンドウの高さです。
+	デフォルトは '4' です。
+
+g:ochawan_is_anonymous			*g:ochawan_is_anonymous*
+	184 の設定です。0 以外の時にコメントを 184 で送ります。
+	デフォルトは 1 です。
+
+g:ochawan_do_bouyomi			*g:ochawna_do_bouyomi*
+	コメントを棒読みちゃんに読ませるかどうかの設定です。
+	0 以外の時にコメントを受信した場合、棒読みちゃんへ
+	そのコメントを送り、読み上げてもらいます。
+	デフォルトは 0 です。
+
+g:ochawan_openbrowser_command	*g:ochawan_openbrowser_command*
+	|:OchawanStartLive| コマンドで生放送を開始するときに枠をとった後
+	ブラウザを開くコマンドを指定します。
+	デフォルトは "OpenBrowser" です。
+
+==============================================================================
+放送情報の記述のサンプル				*ochawan-description-sample*
+
+キーワードの後に必要な情報を記述してください。
+下記はそのサンプルです。
+nicolive_sample.desc と同じ内容です。
+
+------------------------------------------------------------------------------
+
+Broadcast_on: co1508501
+
+Title: vimで枠をとった
+
+>> Description
+放送内容を書く。
+行の最後には<br />が自動的に挿入される。
+Description <<
+
+Tags: ["プログラミング", "vim"]
+Category: 1
+
+1:一般(その他), 2:政治, 3:動物, 4:料理, 5:演奏してみた,
+6:歌ってみた, 7:踊ってみた, 8:描いてみた, 9:講座, 10:ゲーム,
+11:動画紹介, 12:R18,
+
+------------------------------------------------------------------------------
+Broadcast_on: 放送するコミュニティの番号
+Title: 放送タイトル
+Tags: タグのリスト
+Category: カテゴリ
+カテゴリの一覧はなくてもかまいません。
+Category: 1 が書いてあれば、十分です。
+
+==============================================================================
+vim:ts=:4:ft=help
