@@ -48,7 +48,7 @@ class Broadcast:
                 print "Fail GetPlayerStatus()"
                 return
             self.comc.connect(info)
-            self.conn.getToken()
+            self.conn.token = self.conn.getToken()
             th_keep = threading.Thread(target=self.comc.keepSession)
             th_keep.daemon = True
             th_keep.start()
@@ -75,6 +75,7 @@ class Broadcast:
         vim.command(vim.eval("g:ochawan_openbrowser_command") + " "  + url)
 
     def stop(self):
+        self.__reduce__
         self.comc.close()
 
     def live(self):
@@ -136,3 +137,7 @@ class Broadcast:
 
     def doBouyomi(self):
         self.comc.do_bouyomi = True
+
+    def dontBouyomi(self):
+        self.comc.do_bouyomi = False
+

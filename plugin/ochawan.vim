@@ -10,6 +10,7 @@ command! -nargs=0 OchawanStartLive call ochawan#live()
 command! -nargs=0 OchawanOpenBuf call ochawan#open()
 command! -nargs=0 OchawanConnectOnClip call ochawan#connect()
 command! -nargs=1 OchawanSendMsg call ochawan#send(<q-args>)
+command! -nargs=1 OchawanOnBouyomi call ochawan#bouyomi(<q-args>)
 
 let g:ochawan_prompt = get(g:, 'ochawan_prompt', '> ')
 let g:ochawan_buf_height = get(g:, 'ochawan_buf_height', '4')

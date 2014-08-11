@@ -20,7 +20,7 @@ function! s:init()
     return 0
   endif
   python from Broadcast import Broadcast
-  execute "python ochawan = Broadcast('".$HOME."')"
+  python ochawan = Broadcast(vim.eval('$HOME'))
   if g:ochawan_is_bouyomi
     python ochawan.doBouyomi()
   endif
@@ -51,7 +51,7 @@ function! ochawan#connect()
     let url = substitute(url, prefix, '', '')
     let idx = stridx(url, '?')
     let lvid = strpart(url, 0, idx == -1 ? strlen(url) : idx)
-    execute "python ochawan.connect('".lvid."')"
+    python ochawan.connect(vim.eval('lvid'))
     echo "connect: ".lvid
   endif
 endfunction
@@ -80,21 +80,21 @@ function! s:open_buf()
     execute bufwn.'wincmd w'
     return
   endif
-  let bufn = bufnr('ochawan_chat')
-  execute 'silent belowright split ochawan_chat'
-  execute g:ochawan_buf_height.' wincmd _'
-  call s:poll()
-  if bufn > 0
+  if bufexists('ochawan_chat')
+    belowright sbuffer ochawan_chat
+    execute g:ochawan_buf_height.' wincmd _'
+    call setline(1, g:ochawan_prompt)
     return
   endif
+  execute 'silent belowright split ochawan_chat'
+  execute g:ochawan_buf_height.' wincmd _'
   call setline(1, g:ochawan_prompt)
+  call s:poll()
   call s:settings_chat_buf()
   let &filetype = 'ochawan_chat'
   setlocal buftype=nofile
   setlocal noswapfile
-python <<EOM
-ochawan_buf = vim.current.buffer
-EOM
+  python ochawan_buf = vim.current.buffer
 endfunction
 
 function! s:writing()
@@ -159,7 +159,17 @@ endfunction
 
 function! ochawan#send(text)
   let body = iconv(a:text, &encoding, "utf-8")
-  execute "python ochawan.send('".body."',".g:ochawan_is_anonymaous.")"
+  python ochawan.send(vim.eval('body'),vim.eval('g:ochawan_is_anonymaous'))
+endfunction
+
+function! ochawan#bouyomi(do)
+  if s:init()
+    if a:do
+      python ochawan.doBouyomi()
+    else
+      python ochawan.dontBouyomi()
+    endif
+  endif
 endfunction
 
 let &cpo = s:save_cpo
