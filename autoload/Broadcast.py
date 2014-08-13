@@ -75,7 +75,6 @@ class Broadcast:
         vim.command(vim.eval("g:ochawan_openbrowser_command") + " "  + url)
 
     def stop(self):
-        self.__reduce__
         self.comc.close()
 
     def live(self):
